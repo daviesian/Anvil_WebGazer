@@ -8,13 +8,15 @@ class Form1(Form1Template):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
 
-    # Any code you write here will run when the form opens.
+    self.canvas_1.set_event_handler("x-gaze", self.canvas_gaze)
 
-  def button_1_click(self, **event_args):
-    """This method is called when the button is clicked"""
-    self.call_js("wg")
+  def start_tracking_click(self, **event_args):
+    
+    # This function is implemented in the Native Libraries section of the app.
+    self.call_js("startGazeTracking")
 
 
-  def data(self, x, y):
-    print(x,y)
+  def canvas_gaze(self, x, y, **event_args):
+    self.canvas_1.fill_style = "theme:Primary 500"
+    self.canvas_1.fill_rect(x,y,1,1)
 

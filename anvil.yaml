@@ -6,9 +6,21 @@ runtime_options: {version: 2, client_version: '3', server_version: python3-sandb
 metadata: {}
 startup_form: Form1
 native_deps: {head_html: "\n<script async src=\"_/theme/webgazer.js\"></script>\n\n\
-    <script>\n\tfunction wg() {\n        var form = this;\n\t\twebgazer.setGazeListener(function(data)\
-    \ {\n            if (data != null) {\n          \t\tanvil.call(form, \"data\"\
-    , data.x, data.y)              \n            }\n        }).showVideo(false).showFaceOverlay(false).showFaceFeedbackBox(false).showPredictionPoints(true).begin();\n\
-    \t}\n</script>\n"}
+    <script>\n  function startGazeTracking() {\n    var form = this;\n    \n    //\
+    \ Keep a history of the last 20 points and average them to smooth the data a little.\n\
+    \    var HISTORY_MAX_LENGTH = 20;\n    var history = [];\n    var historySum =\
+    \ {x: 0, y: 0};\n    \n    webgazer.setGazeListener(function(data) {\n      if\
+    \ (!data) return;\n      \n      if (history.length > HISTORY_MAX_LENGTH) {\n\
+    \        var removed = history.shift();\n        historySum.x -= removed.x;\n\
+    \        historySum.y -= removed.y;\n      }\n      history.push({x: data.x, y:\
+    \ data.y});\n      historySum.x += data.x;\n      historySum.y += data.y;\n  \
+    \    \n      var averageX = historySum.x / history.length;\n      var averageY\
+    \ = historySum.y / history.length;\n      \n      var element = document.elementFromPoint(averageX,\
+    \ averageY); \n      var component = $(element).closest(\".anvil-component\");\n\
+    \      if (component.length > 0) {\n        PyDefUtils.raiseEventAsync({\n   \
+    \       x: averageX - component.offset().left,\n          y: averageY - component.offset().top,\n\
+    \        }, component.data(\"anvilPyComponent\"), \"x-gaze\");\n      }\n\n  \
+    \  }).showVideo(false)\n      .showFaceOverlay(false)\n      .showFaceFeedbackBox(false)\n\
+    \      .showPredictionPoints(true)\n      .begin();\n  }\n</script>\n"}
 db_schema: []
 renamed: true

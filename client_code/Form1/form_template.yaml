@@ -2,18 +2,42 @@ is_package: true
 container:
   type: HtmlTemplate
   properties: {html: '@theme:standard-page.html'}
+  event_bindings: {show: form_show}
 components:
 - type: ColumnPanel
-  properties: {col_widths: '{}'}
+  properties: {col_widths: '{"EFBLEQ":20,"EAWZLM":40}'}
   name: content_panel
   layout_properties: {slot: default}
   components:
   - type: Button
-    properties: {text: button_1}
-    name: button_1
+    properties: {role: raised, align: center, tooltip: '', border: '', enabled: true,
+      foreground: '', visible: true, text: Start Gaze Tracking, font_size: null, font: '',
+      spacing_above: small, icon_align: left, spacing_below: small, italic: false,
+      background: '', bold: false, underline: false, icon: ''}
+    name: start_tracking
     layout_properties: {grid_position: 'OSDJRD,EFBLEQ'}
-    event_bindings: {click: button_1_click}
+    event_bindings: {click: start_tracking_click}
+  - type: Label
+    properties: {role: null, align: left, tooltip: '', border: '', foreground: '',
+      visible: true, text: 'Click around the screen to calibrate, making sure to look
+        at the cursor while clicking.', font_size: null, font: '', spacing_above: small,
+      icon_align: left, spacing_below: small, italic: false, background: '', bold: false,
+      underline: false, icon: ''}
+    name: label_2
+    layout_properties: {grid_position: 'OSDJRD,EAWZLM'}
+  - type: Canvas
+    properties: {role: null, height: 80vh, tooltip: '', border: '', foreground: '',
+      visible: true, spacing_above: small, spacing_below: small, background: '#ffecc4'}
+    name: canvas_1
+    layout_properties: {grid_position: 'RWHIVX,XQBZIS', full_width_row: true}
 - type: FlowPanel
   properties: {}
   name: navbar_links
   layout_properties: {slot: nav-right}
+- type: Label
+  properties: {role: null, align: left, tooltip: '', border: '', foreground: '', visible: true,
+    text: Anvil WebGazer Demo, font_size: null, font: '', spacing_above: small, icon_align: left,
+    spacing_below: small, italic: false, background: '', bold: false, underline: false,
+    icon: ''}
+  name: label_1
+  layout_properties: {slot: title}
