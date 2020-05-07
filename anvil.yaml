@@ -1,6 +1,16 @@
-allow_embedding: false
-package_name: Material_Design_519
-name: Material Design 519
-startup_form: Form1
-runtime_options: {version: 2, client_version: '3', server_version: python3-sandbox}
 services: []
+package_name: Anvil_WebGazer
+allow_embedding: false
+name: Anvil WebGazer
+runtime_options: {version: 2, client_version: '3', server_version: python3-sandbox}
+metadata: {}
+startup_form: Form1
+native_deps: {head_html: "<script async src=\"_/theme/webgazer.js\"></script>\n\n\
+    <script>\n\tfunction wg() {\n\t\twebgazer.setGazeListener(function(a,b,c,d,e)\
+    \ {\n            //if (data == null) {\n            //    return;\n          \
+    \  //}\n            //var xprediction = data.x; //these x coordinates are relative\
+    \ to the viewport\n            //var yprediction = data.y; //these y coordinates\
+    \ are relative to the viewport\n            console.log(a,b,c,d,e); //elapsed\
+    \ time is based on time since begin was called\n        }).begin();\n\t}\n</script>"}
+db_schema: []
+renamed: true
