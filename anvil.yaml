@@ -5,12 +5,10 @@ name: Anvil WebGazer
 runtime_options: {version: 2, client_version: '3', server_version: python3-sandbox}
 metadata: {}
 startup_form: Form1
-native_deps: {head_html: "<script async src=\"_/theme/webgazer.js\"></script>\n\n\
-    <script>\n\tfunction wg() {\n\t\twebgazer.setGazeListener(function(a,b,c,d,e)\
-    \ {\n            //if (data == null) {\n            //    return;\n          \
-    \  //}\n            //var xprediction = data.x; //these x coordinates are relative\
-    \ to the viewport\n            //var yprediction = data.y; //these y coordinates\
-    \ are relative to the viewport\n            console.log(a,b,c,d,e); //elapsed\
-    \ time is based on time since begin was called\n        }).begin();\n\t}\n</script>"}
+native_deps: {head_html: "\n<script async src=\"_/theme/webgazer.js\"></script>\n\n\
+    <script>\n\tfunction wg() {\n        var form = this;\n\t\twebgazer.setGazeListener(function(data)\
+    \ {\n            if (data != null) {\n          \t\tanvil.call(form, \"data\"\
+    , data.x, data.y)              \n            }\n        }).showVideo(false).showFaceOverlay(false).showFaceFeedbackBox(false).showPredictionPoints(true).begin();\n\
+    \t}\n</script>\n"}
 db_schema: []
 renamed: true

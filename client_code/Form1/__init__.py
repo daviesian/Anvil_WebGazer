@@ -12,7 +12,9 @@ class Form1(Form1Template):
 
   def button_1_click(self, **event_args):
     """This method is called when the button is clicked"""
-    anvil.js.call_js("wg")
+    self.call_js("wg")
 
 
+  def data(self, x, y):
+    print(x,y)
 
